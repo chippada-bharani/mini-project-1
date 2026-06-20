@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rock Paper Scissors vs AI</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        text-align:center;
+        background:#f4f4f4;
+        margin-top:50px;
+    }
+
+    h1{
+        color:#333;
+    }
+
+    .choices button{
+        font-size:20px;
+        padding:15px 25px;
+        margin:10px;
+        cursor:pointer;
+        border:none;
+        border-radius:10px;
+        background:#007bff;
+        color:white;
+    }
+
+    .choices button:hover{
+        background:#0056b3;
+    }
+
+    .result{
+        margin-top:30px;
+        font-size:22px;
+        font-weight:bold;
+    }
+
+    .score{
+        margin-top:20px;
+        font-size:20px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Rock Paper Scissors vs AI</h1>
+
+<div class="choices">
+    <button onclick="play('Rock')">🪨 Rock</button>
+    <button onclick="play('Paper')">📄 Paper</button>
+    <button onclick="play('Scissors')">✂️ Scissors</button>
+</div>
+
+<div class="result" id="result">Choose an option!</div>
+
+<div class="score">
+    You: <span id="userScore">0</span> |
+    AI: <span id="aiScore">0</span>
+</div>
+
+<script>
+let userScore = 0;
+let aiScore = 0;
+
+function play(userChoice){
+
+    const choices = ["Rock","Paper","Scissors"];
+    const aiChoice = choices[Math.floor(Math.random()*3)];
+
+    let result = "";
+
+    if(userChoice === aiChoice){
+        result = "It's a Draw!";
+    }
+    else if(
+        (userChoice === "Rock" && aiChoice === "Scissors") ||
+        (userChoice === "Paper" && aiChoice === "Rock") ||
+        (userChoice === "Scissors" && aiChoice === "Paper")
+    ){
+        result = "You Win!";
+        userScore++;
+    }
+    else{
+        result = "AI Wins!";
+        aiScore++;
+    }
+
+    document.getElementById("result").innerHTML =
+        `You chose <b>${userChoice}</b><br>
+         AI chose <b>${aiChoice}</b><br><br>
+         ${result}`;
+
+    document.getElementById("userScore").textContent = userScore;
+    document.getElementById("aiScore").textContent = aiScore;
+}
+</script>
+
+</body>
+</html>
